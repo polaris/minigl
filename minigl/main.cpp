@@ -22,7 +22,7 @@ static const char *g_shader =
 "{"
 	"vec2 u=(gl_FragCoord.xy/600);"
 	"u-=vec2((800/600)/2.,.5);"	
-	"vec3 g=vec3(0);"
+	"vec3 g=vec3(0),c=vec3(0);"
 	"for(float i=1.;i<100;i++){"
 		"float q=t*.05-.6*i;"
 		"vec2 p=vec2(.75*sin(q),.5*sin(q));"
@@ -31,7 +31,6 @@ static const char *g_shader =
 		"float m=.005/((u.x-p.x)*(u.x-p.x)+(u.y-p.y)*(u.y-p.y))/i;"
 		"g+=vec3(m/2.,m/3.,m);"
 	"}"
-	"vec3 c=vec3(0,0,0);"
 	"c+=pow(g,vec3(1.1,.1,0));"
     "o=vec4(c,1);"
 "}";
@@ -92,7 +91,7 @@ __declspec(naked) void winmain() {
     glGetShaderiv(shader, GL_COMPILE_STATUS, &compiled);
     if (!compiled) {
         OutputDebugString("Failed to compile shader. Aborting!");
-	    return -1;
+        return -1;
     }
     OutputDebugString("------------------------------------------\n");
 
