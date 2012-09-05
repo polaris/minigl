@@ -24,7 +24,7 @@ static const char *g_shader =
 	"u-=vec2((800/600)/2.,.5);"	
 	"vec3 g=vec3(0),c=vec3(0);"
 	"for(float i=1.;i<100;i++){"
-		"float q=t*.05-.6*i;"
+		"float q=t*.5-.6*i;"
 		"vec2 p=vec2(.75*sin(q),.5*sin(q));"
 		"p+=vec2(.75*cos(q*0.1),.5*sin(q*.3));"
 		"p/=4.*sin(i);"
@@ -97,7 +97,7 @@ __declspec(naked) void winmain() {
 
 #endif
     do {
-        const float time = timeGetTime() / 100.0f;
+        const float time = timeGetTime() / 1000.0f;
         ((PFNGLUNIFORM1FPROC)wglGetProcAddress("glUniform1f"))(((PFNGLGETUNIFORMLOCATIONPROC)wglGetProcAddress("glGetUniformLocation"))(prog, "t"), time);
         glRects(-1, -1, 1, 1);
         SwapBuffers(hDC);
